@@ -1,7 +1,27 @@
 <?php
 /**
- *  Añadir documentación
+ * Funciones generales del proyecto
+ *
+ * Contiene utilidades para el registro y validación de usuarios.
+ *
+ * @package MountainClimbing
+ * @version 1.0
  */
+
+/**
+ * Registra un nuevo usuario validando todos los campos.
+ *
+ * @param string $usuario Nombre del usuario.
+ * @param string $email Correo electrónico del usuario.
+ * @param string $contraseña Contraseña del usuario.
+ * @param string $confirmarContraseña Confirmación de contraseña.
+ * @param string $nivel Nivel de experiencia del usuario.
+ * @param array $especializacion Áreas de especialización.
+ * @param string $provincia Provincia seleccionada.
+ *
+ * @return array|string[] Devuelve un array con los datos del usuario o un array de errores.
+ */
+
 function registrarUsuario($usuario, $email, $contraseña, $confirmarContraseña, $nivel, $especializacion, $provincia) {
     $errores = [];
 

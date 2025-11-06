@@ -1,4 +1,15 @@
 <?php
+/**
+ * Registro de nuevos usuarios
+ *
+ * Este script procesa los datos enviados desde el formulario de registro,
+ * valida la información, crea un nuevo usuario y lo almacena en la sesión.
+ * Luego redirige a la página de login.
+ *
+ * @package MountainClimbing
+ * @version 1.0
+ */
+
 session_start();
 // Descomenta esta línea SOLO si quieres vaciar todos los usuarios temporalmente
 // unset($_SESSION['usuarios']);

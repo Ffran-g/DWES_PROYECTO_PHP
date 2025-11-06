@@ -1,4 +1,15 @@
 <?php
+/**
+ * Autenticación de usuarios
+ *
+ * Este script valida las credenciales ingresadas en el formulario de login,
+ * comparando usuario/email y contraseña contra los datos almacenados en sesión.
+ * Si la autenticación es correcta, redirige a profile.php.
+ *
+ * @package MountainClimbing
+ * @version 1.0
+ */
+
 require_once 'functions.php';
 session_start();
 $nuevoUsuario = $_SESSION['nuevoUsuario'] ?? null;
