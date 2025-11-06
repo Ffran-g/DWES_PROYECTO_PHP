@@ -1,37 +1,11 @@
 <?php
 
 session_start();
-/**
- *  Añadir documentación
- */
-function registrarUsuario($usuario, $email, $contraseña, $confirmarContraseña, $nivel, $especializacion, $provincia) {
-    $errores = [];
+require_once "../includes/functions.php";
 
-    // Validaciones
-    if (empty($usuario)) $errores[] = "El campo usuario es obligatorio";
-    if (empty($email)) $errores[] = "El campo email es obligatorio";
-    if (empty($contraseña)) $errores[] = "El campo contraseña es obligatorio";
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) $errores[] = "Email no válido";
-    if ($contraseña !== $confirmarContraseña) $errores[] = "Las contraseñas no coinciden";
-    if (strlen($contraseña) < 8) $errores[] = "Contraseña demasiado corta";
-
-    if (empty($errores)) {
-        $datosNuevoUser = [
-            "usuario" => $usuario,
-            "email" => $email,
-            "contraseña" => $contraseña,
-            "nivel" => $nivel,
-            "especializacion" => $especializacion,
-            "provincia" => $provincia
-        ];
-        return $datosNuevoUser;
-    } else {
-        return $errores;
-    }
-}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $datosUsuario = registrarUsuario(
+    $nuevoUsuario = registrarUsuario(
         $_POST['usernameInput'] ?? '',
         $_POST['emailInput'] ?? '',
         $_POST['passwordInput'] ?? '',
@@ -41,20 +15,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_POST['provincia'] ?? ''
     );
 
-    // Mostrar datos
-
-    // var_dump($datosUsuario)
-    echo "<pre>";
-    if (isset($datosUsuario[0]) && is_string($datosUsuario[0])) {
-        echo "Errores encontrados:\n";
-        print_r($datosUsuario);
+    if (isset($nuevoUsuario[0]) && is_string($nuevoUsuario[0])) {
+        echo "Errores encontrados:<br>";
+        print_r($nuevoUsuario);
     } else {
-        echo "Datos guardados correctamente:\n";
-        print_r($datosUsuario);
-
-        $_SESSION['datosUsuario'] = $resultado;
-        echo "\nUsuario guardado en sesión correctamente.";
-    }
-    echo "</pre>";
+        $_SESSION['usuarios'][] = $nuevoUsuario;
+        header("Location: login.php?registro=ok");
+        exit;
+    } 
+        // var_dump($nuevoUsuario)
+        
+        //echo "<pre>";
+        //if (isset($nuevoUsuario[0]) && is_string($nuevoUsuario[0])) {
+        //    echo "Errores encontrados:\n";
+        //    print_r($nuevoUsuario);
+        //} else {
+        //    echo "Datos guardados correctamente:\n";
+        //    print_r($nuevoUsuario);
+    
+        //    $_SESSION['nuevoUsuario'] = $nuevoUsuario;
+        //    echo "\nUsuario guardado en sesión correctamente.";
+        //}
+        //echo "</pre>";
+    
 }
 ?>
