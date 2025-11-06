@@ -1,4 +1,9 @@
 <?php
+
+session_start();
+/**
+ *  Añadir documentación
+ */
 function registrarUsuario($usuario, $email, $contraseña, $confirmarContraseña, $nivel, $especializacion, $provincia) {
     $errores = [];
 
@@ -46,6 +51,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         echo "Datos guardados correctamente:\n";
         print_r($datosUsuario);
+
+        $_SESSION['datosUsuario'] = $resultado;
+        echo "\nUsuario guardado en sesión correctamente.";
     }
     echo "</pre>";
 }
