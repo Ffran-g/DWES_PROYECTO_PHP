@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include_once __DIR__ . "/../includes/header.php";
 ?>
 <div class="container mt-5">
@@ -6,7 +7,7 @@
                 <div class="card-body p-4">
                 <h3 class="card-title text-center mb-4 text-success">Iniciar Sesion</h3>
 
-                <form action="login.php" method="POST"> 
+                <form action="../includes/auth_check.php" method="POST"> 
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="loginInput" name="loginInput" placeholder="Nombre de usuario o Email" required>
                         <label for="loginInput">Nombre de Usuario / Email</label>

@@ -17,7 +17,7 @@ function registrarUsuario($usuario, $email, $contraseña, $confirmarContraseña,
         $nuevoUsuario = [
             "usuario" => $usuario,
             "email" => $email,
-            "contraseña" => $contraseña,
+            "contraseña" => password_hash($contraseña, PASSWORD_DEFAULT),
             "nivel" => $nivel,
             "especializacion" => $especializacion,
             "provincia" => $provincia

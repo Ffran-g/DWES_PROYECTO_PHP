@@ -1,5 +1,6 @@
 <?php
-include_once __DIR__ . "/../includes/header.php";
+    session_start();
+    include_once __DIR__ . "/../includes/header.php";
 ?>
 
 <div class="container mt-5">

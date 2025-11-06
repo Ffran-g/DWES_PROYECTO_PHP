@@ -1,8 +1,9 @@
 <?php
-
 session_start();
-require_once "../includes/functions.php";
+// Descomenta esta línea SOLO si quieres vaciar todos los usuarios temporalmente
+// unset($_SESSION['usuarios']);
 
+require_once "../includes/functions.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nuevoUsuario = registrarUsuario(
@@ -15,28 +16,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_POST['provincia'] ?? ''
     );
 
+    // Si hay errores de validación
     if (isset($nuevoUsuario[0]) && is_string($nuevoUsuario[0])) {
         echo "Errores encontrados:<br>";
         print_r($nuevoUsuario);
     } else {
-        $_SESSION['usuarios'][] = $nuevoUsuario;
-        header("Location: login.php?registro=ok");
-        exit;
-    } 
-        // var_dump($nuevoUsuario)
-        
-        //echo "<pre>";
-        //if (isset($nuevoUsuario[0]) && is_string($nuevoUsuario[0])) {
-        //    echo "Errores encontrados:\n";
-        //    print_r($nuevoUsuario);
-        //} else {
-        //    echo "Datos guardados correctamente:\n";
-        //    print_r($nuevoUsuario);
-    
-        //    $_SESSION['nuevoUsuario'] = $nuevoUsuario;
-        //    echo "\nUsuario guardado en sesión correctamente.";
-        //}
-        //echo "</pre>";
-    
+        // Inicializar el array de usuarios si no existe
+        if (!isset($_SESSION['usuarios'])) {
+            $_SESSION['usuarios'] = [];
+        }
+
+        // 🔹 Comprobar si ya existe un usuario con el mismo email
+        $existe = false;
+        foreach ($_SESSION['usuarios'] as $u) {
+            if ($u['email'] === $nuevoUsuario['email']) {
+                $existe = true;
+                break;
+            }
+        }
+
+        // 🔹 Si no existe, guardarlo
+        if (!$existe) {
+            // Guardar también el usuario actual
+            $_SESSION['nuevoUsuario'] = $nuevoUsuario;
+            $_SESSION['usuarios'][] = $nuevoUsuario;
+
+            header("Location: login.php?registro=ok");
+            exit;
+        } else {
+            echo "<p style='color:red;'>Ya existe un usuario con ese correo electrónico.</p>";
+        }
+    }
 }
 ?>
