@@ -37,6 +37,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     );
 
     // Mostrar datos
+
+    // var_dump($datosUsuario)
     echo "<pre>";
     if (isset($datosUsuario[0]) && is_string($datosUsuario[0])) {
         echo "Errores encontrados:\n";
