@@ -1,0 +1,16 @@
+.text-indigo {
+  color: indigo !important;
+}
+
+.btn-purple {
+  background-color: purple !important;
+  border-color: purple !important;
+  color: white !important;
+}
+
+.btn-purple:hover {
+  background-color: indigo !important;
+  border-color: indigo !important;
+  color: white !important;
+}
+
