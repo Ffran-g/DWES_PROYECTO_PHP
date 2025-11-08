@@ -17,14 +17,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['user'] = $user; // Guardamos los datos del usuario en sesión
             $user_found = true;
 
+            if (isset($_POST['remember'])) {
+                // Guardar cookies que duren, por ejemplo, 7 días
+                setcookie('remember_user', $_SESSION['user']['username'], 0, "/");
+                setcookie('remember_email', $_SESSION['user']['email'], 0, "/");
+            } else {
+                // Si no marca la casilla, eliminamos cookies anteriores
+                setcookie('remember_user', '', time() - 3600, "/");
+                setcookie('remember_email', '', time() - 3600, "/");
+            }
+
+
             header('Location: ../public/index.php');
             exit();
         }
     }
 
-    // Si no se encontró usuario
     if (!$user_found) {
-        $_SESSION['login_error'] = 'Nombre de usuario o correo, o contraseña incorrectos.';
+        $_SESSION['login_error'] = "Usuario o contraseña incorrectos";
         header('Location: ../public/login.php');
         exit();
     }

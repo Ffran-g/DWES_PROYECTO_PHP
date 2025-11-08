@@ -1,23 +1,21 @@
 <?php
-
 session_start();
-// echo "<pre>";
-// var_dump($_SESSION['users']);
-// echo "</pre>";
+//echo "<pre>";
+//var_dump($_SESSION['users']);
+//echo "</pre>";
 
 ?>
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MOINTAIN CLIMBING</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="../includes/style.css">
+    <title>Mountain Climbing</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
-    <header class="p-3 text-bg-dark"> 
+    <header class="p-3 text-bg-custom"> 
         <div class="container"> 
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"> 
                 <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none"> 
@@ -25,17 +23,35 @@ session_start();
                         <use xlink:href="#bootstrap"></use>
                     </svg> 
                 </a> 
+                <img src="../assets/img/logo.png" alt="Logo de la página" width="80">
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"> 
-                    <li><a href="#" class="nav-link px-2 text-secondary">Mountain Climbing</a></li> 
-                    <li><a href="#" class="nav-link px-2 text-white">Rutas</a></li> 
-                    <li><a href="#" class="nav-link px-2 text-white">Ferratas</a></li> 
-                    <li><a href="#" class="nav-link px-2 text-white">Escalada</a></li> 
-                    <li><a href="#" class="nav-link px-2 text-white">Galeria</a></li> 
+                    <?php if (isset($_SESSION['user'])): ?>
+                        <!-- Header con sesión iniciada -->
+                        <li><a href="../index.php" class="nav-link px-2 text-warning">Mountain Climbing</a></li>
+                        <li><a href="../public/routes/create.php" class="nav-link px-2 text-white">Rutas</a></li>
+                        <li><a href="#" class="nav-link px-2 text-white">Ferratas</a></li>
+                        <li><a href="#" class="nav-link px-2 text-white">Escalada</a></li>
+                        <li><a href="#" class="nav-link px-2 text-white">Galería</a></li>
+                    <?php else: ?>
+                        <!-- Header sin sesión -->
+                        <li><a href="../public/login.php" class="nav-link px-2 text-warning">Mountain Climbing</a></li>
+                    <?php endif; ?>
                 </ul> 
-                <div class="text-end"> 
-                    <button type="button" class="btn btn-outline-light me-2" onclick="window.location.href='../public/login.php'">Login</button>
- 
-                    <button type="button" class="btn btn-warning" onclick="window.location.href='../public/register.php'">Sign-up</button> 
+
+                <div class="text-end">
+                    <?php if (isset($_SESSION['user'])): ?>
+                        <span class="me-3">
+                            <a href="../public/profile.php" class="text-warning text-decoration-none">
+                                <?php $foto = $_SESSION['user']['foto'] ?? '../assets/img/logo.png'; ?>
+                                <img src="<?= htmlspecialchars($foto) ?>" alt="Foto de perfil" class="rounded-circle me-2" style="width: 35px; height: 35px; object-fit: cover;">
+                                <?php echo htmlspecialchars($_SESSION['user']['username']); ?>
+                            </a>
+                        </span>
+                        <button type="button" class="btn btn-sunrise btn-outline-light" onclick="window.location.href='../public/logout.php'">Cerrar sesión</button>
+                    <?php else: ?>
+                        <button type="button" class="btn btn-outline-light me-2" onclick="window.location.href='../public/login.php'">Login</button>
+                        <button type="button" class="btn btn-sunrise" onclick="window.location.href='../public/register.php'">Sign-up</button>
+                    <?php endif; ?>
                 </div> 
             </div> 
         </div> 

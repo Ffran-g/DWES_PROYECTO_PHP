@@ -15,14 +15,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username'] ?? '');
     $email = trim($_POST['email'] ?? '');
     $password = trim($_POST['password'] ?? '');
+    $confirmPassword = trim($_POST['confirmPassword'] ?? '');
     $level = $_POST['level'] ?? '';
     $disciplines = $_POST['disciplines'] ?? [];
     $provincia = $_POST['provincia'] ?? '';
 
     // Validación básica
-    if (empty($username) || empty($email) || empty($password) || empty($level) || empty($provincia)) {
+    if (empty($username) || empty($email) || empty($password) || empty($confirmPassword) || empty($level) || empty($provincia)) {
         $message = '<div class="alert alert-danger mt-3">Por favor, completa todos los campos obligatorios.</div>';
-    } else {
+    } 
+    
+    // Comprobar contraseñas
+    if ($password !== $confirmPassword){
+        $message = '<div class="alert alert-danger mt-3">Las contraseñas no coinciden.</div>';
+    }else {
         // Comprobamos si ya existe el usuario o el email
         $exists = false;
         foreach ($_SESSION['users'] as $user) {
@@ -76,13 +82,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
 
                 <div class="mb-3">
+                    <label for="confirmPasswdInput" class="form-label">Confirmar Contraseña</label>
+                    <input type="password" class="form-control" id="confirmPasswdInput" name="confirmPassword" placeholder="••••••••">
+                </div>
+
+                <div class="mb-3">
                     <label for="level" class="form-label">Nivel</label>
                     <select class="form-select" id="level" name="level">
                         <option value="" selected disabled>Selecciona tu nivel</option>
-                        <option value="principiante">Principiante</option>
-                        <option value="amateur">Amateur</option>
-                        <option value="intermedio">Intermedio</option>
-                        <option value="experto">Experto</option>
+                        <option value="Principiante">Principiante</option>
+                        <option value="Amateur">Amateur</option>
+                        <option value="Intermedio">Intermedio</option>
+                        <option value="Experto">Experto</option>
                     </select>
                 </div>
 
@@ -90,15 +101,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <label class="form-label d-block">Disciplinas</label>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" name="disciplines[]" value="ferratas" id="ferratas">
-                        <label class="form-check-label" for="ferratas">Ferratas</label>
+                        <label class="form-check-label" for="Ferratas">Ferratas</label>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" name="disciplines[]" value="escalada" id="escalada">
-                        <label class="form-check-label" for="escalada">Escalada</label>
+                        <label class="form-check-label" for="Escalada">Escalada</label>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" name="disciplines[]" value="rutas" id="rutas">
-                        <label class="form-check-label" for="rutas">Rutas</label>
+                        <label class="form-check-label" for="Rutas">Rutas</label>
                     </div>
                 </div>
 
@@ -106,14 +117,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <label for="provincia" class="form-label">Provincia</label>
                     <select class="form-select" id="provincia" name="provincia">
                         <option value="" selected disabled>Selecciona tu provincia</option>
-                        <option value="huesca">Huesca</option>
-                        <option value="zaragoza">Zaragoza</option>
-                        <option value="teruel">Teruel</option>
+                        <option value="Huesca">Huesca</option>
+                        <option value="Zaragoza">Zaragoza</option>
+                        <option value="Teruel">Teruel</option>
                     </select>
                 </div>
 
                 <div class="d-grid">
-                    <button type="submit" class="btn btn-purple btn-lg">Registrarme</button>
+                    <button type="submit" class="btn btn-sunrise btn-lg">Registrarme</button>
                 </div>
             </form>
             <?= $message ?>
