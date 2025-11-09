@@ -23,10 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Validación básica
     if (empty($username) || empty($email) || empty($password) || empty($confirmPassword) || empty($level) || empty($provincia)) {
         $message = '<div class="alert alert-danger mt-3">Por favor, completa todos los campos obligatorios.</div>';
-    } 
-    
-    // Comprobar contraseñas
-    if ($password !== $confirmPassword){
+    }elseif ($password !== $confirmPassword){
         $message = '<div class="alert alert-danger mt-3">Las contraseñas no coinciden.</div>';
     }else {
         // Comprobamos si ya existe el usuario o el email
@@ -100,16 +97,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="mb-3">
                     <label class="form-label d-block">Disciplinas</label>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="disciplines[]" value="ferratas" id="ferratas">
-                        <label class="form-check-label" for="Ferratas">Ferratas</label>
+                        <input class="form-check-input" type="checkbox" name="disciplines[]" value="Ferratas" id="ferratas">
+                        <label class="form-check-label" for="ferratas">Ferratas</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="disciplines[]" value="escalada" id="escalada">
-                        <label class="form-check-label" for="Escalada">Escalada</label>
+                        <input class="form-check-input" type="checkbox" name="disciplines[]" value="Escalada" id="escalada">
+                        <label class="form-check-label" for="escalada">Escalada</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="disciplines[]" value="rutas" id="rutas">
-                        <label class="form-check-label" for="Rutas">Rutas</label>
+                        <input class="form-check-input" type="checkbox" name="disciplines[]" value="Rutas" id="rutas">
+                        <label class="form-check-label" for="rutas">Rutas</label>
                     </div>
                 </div>
 

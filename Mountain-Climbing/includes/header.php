@@ -3,16 +3,18 @@ session_start();
 //echo "<pre>";
 //var_dump($_SESSION['users']);
 //echo "</pre>";
-
+require_once __DIR__ . '/../config/config.php';
+$foto = $user['foto'] ?? BASE_URL . '../assets/img/img_perfil.jpg';
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="<?= BASE_URL ?>/assets/img/Logo.png">
     <title>Mountain Climbing</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/style.css">
 </head>
 <body>
     <header class="p-3 text-bg-custom"> 
@@ -23,12 +25,12 @@ session_start();
                         <use xlink:href="#bootstrap"></use>
                     </svg> 
                 </a> 
-                <img src="../assets/img/logo.png" alt="Logo de la página" width="80">
+                <img src="<?= BASE_URL ?>/assets/img/Logo.png" alt="Logo de la página" width="80">
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"> 
                     <?php if (isset($_SESSION['user'])): ?>
                         <!-- Header con sesión iniciada -->
-                        <li><a href="../index.php" class="nav-link px-2 text-warning">Mountain Climbing</a></li>
-                        <li><a href="../public/routes/create.php" class="nav-link px-2 text-white">Rutas</a></li>
+                        <li><a href="<?= BASE_URL ?>/public/index.php" class="nav-link px-2 text-warning">Mountain Climbing</a></li>
+                        <li><a href="<?= BASE_URL ?>/public/routes/create.php" class="nav-link px-2 text-white">Rutas</a></li>
                         <li><a href="#" class="nav-link px-2 text-white">Ferratas</a></li>
                         <li><a href="#" class="nav-link px-2 text-white">Escalada</a></li>
                         <li><a href="#" class="nav-link px-2 text-white">Galería</a></li>
@@ -41,8 +43,7 @@ session_start();
                 <div class="text-end">
                     <?php if (isset($_SESSION['user'])): ?>
                         <span class="me-3">
-                            <a href="../public/profile.php" class="text-warning text-decoration-none">
-                                <?php $foto = $_SESSION['user']['foto'] ?? '../assets/img/logo.png'; ?>
+                            <a href="<?= BASE_URL ?>/public/profile.php" class="text-warning text-decoration-none">
                                 <img src="<?= htmlspecialchars($foto) ?>" alt="Foto de perfil" class="rounded-circle me-2" style="width: 35px; height: 35px; object-fit: cover;">
                                 <?php echo htmlspecialchars($_SESSION['user']['username']); ?>
                             </a>

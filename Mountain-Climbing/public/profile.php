@@ -7,7 +7,10 @@ if (!isset($_SESSION['user'])) {
 }
 
 $user = $_SESSION['user'];
-$foto = $user['foto'] ?? '../assets/img/logo.png';
+$foto = $user['foto'] ?? '../assets/img/img_perfil.jpg';
+
+// Contar rutas creadas (si se usan sesiones globales)
+$rutasCreadas = isset($_SESSION['rutas']) ? count($_SESSION['rutas']) : 0;
 ?>
 
 <div class="container py-5">
@@ -51,12 +54,19 @@ $foto = $user['foto'] ?? '../assets/img/logo.png';
                         <strong>Provincia:</strong> <?= htmlspecialchars($user['provincia']) ?>
                     </li>
                 <?php endif; ?>
+
+                <!-- Nueva línea para cantidad de rutas -->
+                <li class="list-group-item">
+                    <strong>Rutas creadas:</strong> <?= $rutasCreadas ?>
+                    <button type="button" class="btn btn-sunrise" onclick="window.location.href='<?= BASE_URL ?>/public/routes/list.php'">Ver lista de rutas</button>
+                </li>
             </ul>
 
             <div class="text-center">
                 <a href="#" class="btn btn-sunrise me-2">Editar Perfil</a>
                 <a href="logout.php" class="btn btn-danger">Cerrar Sesión</a>
             </div>
+            
         </div>
     </div>
 </div>
