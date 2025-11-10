@@ -6,12 +6,13 @@ if (!isset($_SESSION['users'])) {
     $_SESSION['users'] = [];
 }
 
-// Variable para mensaje
+// Variables
 $message = '';
+$exists = false;
 
-// Comprobamos si se envió el formulario
+// Comprobar envio formulario
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Recogemos los datos del formulario
+    // Recoger datos
     $username = trim($_POST['username'] ?? '');
     $email = trim($_POST['email'] ?? '');
     $password = trim($_POST['password'] ?? '');
@@ -26,8 +27,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }elseif ($password !== $confirmPassword){
         $message = '<div class="alert alert-danger mt-3">Las contraseñas no coinciden.</div>';
     }else {
-        // Comprobamos si ya existe el usuario o el email
-        $exists = false;
         foreach ($_SESSION['users'] as $user) {
             if ($user['email'] === $email || $user['username'] === $username) {
                 $exists = true;
@@ -38,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($exists) {
             $message = '<div class="alert alert-warning mt-3">El usuario o el correo ya están registrados.</div>';
         } else {
-            // Guardamos el nuevo usuario en el array
+            // Guardar nuevo usuario
             $_SESSION['users'][] = [
                 'username' => $username,
                 'email' => $email,

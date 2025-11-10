@@ -9,7 +9,7 @@ if (!isset($_SESSION['user'])) {
 $user = $_SESSION['user'];
 $foto = $user['foto'] ?? '../assets/img/img_perfil.jpg';
 
-// Contar rutas creadas (si se usan sesiones globales)
+// Contar rutas creadas
 $rutasCreadas = isset($_SESSION['rutas']) ? count($_SESSION['rutas']) : 0;
 ?>
 
