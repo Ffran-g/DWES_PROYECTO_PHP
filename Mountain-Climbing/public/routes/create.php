@@ -60,6 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Guardar ruta en sesión
         $_SESSION['rutas'][] = [
+            'user' => $_SESSION['user']['username'],
             'nombreRuta' => $nombreRuta,
             'dificultad' => $dificultad,
             'distancia' => $distancia,

@@ -48,7 +48,7 @@ $foto = $user['foto'] ?? BASE_URL . '../assets/img/img_perfil.jpg';
                                 <?php echo htmlspecialchars($_SESSION['user']['username']); ?>
                             </a>
                         </span>
-                        <button type="button" class="btn btn-sunrise btn-outline-light" onclick="window.location.href='../public/logout.php'">Cerrar sesión</button>
+                        <button type="button" class="btn btn-sunrise btn-outline-light" onclick="window.location.href='<?= BASE_URL ?>/public/logout.php'">Cerrar sesión</button>
                     <?php else: ?>
                         <button type="button" class="btn btn-outline-light me-2" onclick="window.location.href='../public/login.php'">Login</button>
                         <button type="button" class="btn btn-sunrise" onclick="window.location.href='../public/register.php'">Sign-up</button>
