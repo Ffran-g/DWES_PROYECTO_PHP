@@ -4,7 +4,8 @@ session_start();
 //var_dump($_SESSION['users']);
 //echo "</pre>";
 require_once __DIR__ . '/../config/config.php';
-$foto = $user['foto'] ?? BASE_URL . '../assets/img/img_perfil.jpg';
+require_once __DIR__ . '/../includes/functions.php';
+$foto = $_SESSION['user']['foto'] ?? BASE_URL . '/assets/img/img_perfil.jpg';
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -27,21 +28,21 @@ $foto = $user['foto'] ?? BASE_URL . '../assets/img/img_perfil.jpg';
                 </a> 
                 <img src="<?= BASE_URL ?>/assets/img/Logo.png" alt="Logo de la página" width="80">
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"> 
-                    <?php if (isset($_SESSION['user'])): ?>
+                    <?php if (isUserLoggedIn()): ?>
                         <!-- Header con sesión iniciada -->
                         <li><a href="<?= BASE_URL ?>/public/index.php" class="nav-link px-2 text-warning">Mountain Climbing</a></li>
-                        <li><a href="<?= BASE_URL ?>/public/routes/create.php" class="nav-link px-2 text-white">Rutas</a></li>
+                        <li><a href="<?= BASE_URL ?>/public/routes/list.php" class="nav-link px-2 text-white">Rutas</a></li>
                         <li><a href="#" class="nav-link px-2 text-white">Ferratas</a></li>
                         <li><a href="#" class="nav-link px-2 text-white">Escalada</a></li>
                         <li><a href="#" class="nav-link px-2 text-white">Galería</a></li>
                     <?php else: ?>
                         <!-- Header sin sesión -->
-                        <li><a href="../public/login.php" class="nav-link px-2 text-warning">Mountain Climbing</a></li>
+                        <li><a href="../public/index.php" class="nav-link px-2 text-warning">Mountain Climbing</a></li>
                     <?php endif; ?>
                 </ul> 
 
                 <div class="text-end">
-                    <?php if (isset($_SESSION['user'])): ?>
+                    <?php if (isUserLoggedIn()): ?>
                         <span class="me-3">
                             <a href="<?= BASE_URL ?>/public/profile.php" class="text-warning text-decoration-none">
                                 <img src="<?= htmlspecialchars($foto) ?>" alt="Foto de perfil" class="rounded-circle me-2" style="width: 35px; height: 35px; object-fit: cover;">

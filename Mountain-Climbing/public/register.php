@@ -1,6 +1,6 @@
 <?php
 include_once __DIR__ . '/../includes/header.php';
-
+require_once __DIR__ . '/../includes/functions.php';
 // Inicializar array de usuarios si no existe
 if (!isset($_SESSION['users'])) {
     $_SESSION['users'] = [];
@@ -24,6 +24,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Validación básica
     if (empty($username) || empty($email) || empty($password) || empty($confirmPassword) || empty($level) || empty($provincia)) {
         $message = '<div class="alert alert-danger mt-3">Por favor, completa todos los campos obligatorios.</div>';
+    }elseif (!isValidEmail($email)){
+        $message = '<div class="alert alert-danger mt-3">El formato del correo electrónico no es válido.</div>';
+    }elseif (!isValidPassword($password)){
+        $message = '<div class="alert alert-danger mt-3">La contraseña debe tener al menos 8 caracteres, incluyendo letras y números.</div>';
     }elseif ($password !== $confirmPassword){
         $message = '<div class="alert alert-danger mt-3">Las contraseñas no coinciden.</div>';
     }else {

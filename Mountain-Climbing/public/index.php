@@ -19,6 +19,12 @@ include_once __DIR__ . '/../includes/header.php';
                         Las vías ferratas son rutas equipadas con cables, grapas y escaleras de acero que permiten ascender paredes rocosas con seguridad.  
                         Perfectas para quienes buscan una mezcla de adrenalina y paisaje.
                     </p>
+                    <?php if (isset($_SESSION['user'])): ?>
+                    <div class="d-flex justify-content-center gap-2 mt-4">
+                        <button type="button" class="btn btn-sunrise" onclick="#">Lista de ferratas</button>
+                        <button type="button" class="btn btn-sunrise" onclick="#">Crear ferrata</button>
+                    </div>
+                    <?php endif; ?> 
                 </div>
             </div>
         </div>
@@ -32,6 +38,12 @@ include_once __DIR__ . '/../includes/header.php';
                         La escalada deportiva es una disciplina que combina técnica, fuerza y concentración.  
                         Desde muros artificiales hasta rutas naturales, la escalada es una forma única de superarte física y mentalmente.
                     </p>
+                    <?php if (isset($_SESSION['user'])): ?>
+                    <div class="d-flex justify-content-center gap-2 mt-4">
+                        <button type="button" class="btn btn-sunrise" onclick="#">Lista de escalada</button>
+                        <button type="button" class="btn btn-sunrise" onclick="#">Crear escalada</button>
+                    </div>
+                    <?php endif; ?> 
                 </div>
             </div>
         </div>
@@ -45,6 +57,12 @@ include_once __DIR__ . '/../includes/header.php';
                         Las rutas de senderismo te conectan con la naturaleza a través de paisajes únicos.  
                         Descubre itinerarios adaptados a todos los niveles, desde paseos tranquilos hasta travesías exigentes.
                     </p>
+                    <?php if (isset($_SESSION['user'])): ?>
+                    <div class="d-flex justify-content-center gap-2 mt-4">
+                        <button type="button" class="btn btn-sunrise" onclick="window.location.href='<?= BASE_URL ?>/public/routes/list.php'">Lista de rutas</button>
+                        <button type="button" class="btn btn-sunrise" onclick="window.location.href='<?= BASE_URL ?>/public/routes/create.php'">Crear ruta</button>
+                    </div>
+                    <?php endif; ?>                
                 </div>
             </div>
         </div>

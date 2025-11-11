@@ -165,7 +165,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </form>
             <?= $message ?>
         </div>
-        <button type="button" class="btn btn-sunrise" onclick="window.location.href='../routes/list.php'">Ver lista de rutas</button>
     </div>
 </div>
 
