@@ -13,12 +13,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             && password_verify($password, $user['password'])) {
             
             // Usuario correcto
-            $_SESSION['logged_in'] = true;
             $_SESSION['user'] = $user; // Guardar datos usuario en sesión
             $user_found = true;
 
             if (isset($_POST['remember'])) {
-                // Guardar cookies 7 días
+                // Guardar cookies
                 setcookie('remember_user', $_SESSION['user']['username'], 0, "/");
                 setcookie('remember_email', $_SESSION['user']['email'], 0, "/");
             } else {
